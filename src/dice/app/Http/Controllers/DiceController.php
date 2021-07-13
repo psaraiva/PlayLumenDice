@@ -11,7 +11,7 @@ class DiceController extends Controller
     public function play(Request $request)
     {
         $this->validate($request, [
-            'quantity' => 'nullable|min:1|max:50',
+            'quantity' => 'nullable|numeric|between:0,10',
             'face' => [
                 'nullable',
                 Rule::in(Dice::FACES)

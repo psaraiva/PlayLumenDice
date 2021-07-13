@@ -38,6 +38,8 @@ class DiceTest extends TestCase
         }
     }
 
+//@todo build test for default values of play methods.
+
     public function testQuantityDiceByResult()
     {
         $quantity = rand(1,5);

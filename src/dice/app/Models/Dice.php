@@ -9,11 +9,11 @@ class Dice
     const QUANTITY_DEFAULT = 1;
     const QUANTITY_LIMIT = 5;
 
-    public static function play(int $quantity, int $face = self::FACE_DEFAULT): array
+    public static function play(int $quantity = self::QUANTITY_DEFAULT, int $face = self::FACE_DEFAULT): array
     {
         $data = ['dice'=>[]];
         $face = ($face == 0) ? self::FACE_DEFAULT : $face;
-        $quantity = $quantity == 0 ? self::QUANTITY_DEFAULT : $quantity;
+        $quantity = ($quantity == 0) ? self::QUANTITY_DEFAULT : $quantity;
         if (!self::isValidQuantity($quantity) || !self::isValidFace($face)) {
             return $data;
         }

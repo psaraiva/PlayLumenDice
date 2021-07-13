@@ -17,7 +17,8 @@ All test:
 - `docker exec play-lumen-dice-api vendor/bin/phpunit`;
 
 Or one test
-- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/DiceTest.php`;
+- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/class/DiceTest.php`;
+- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/request/PlayTest.php`;
 
 ## Request to play
 
