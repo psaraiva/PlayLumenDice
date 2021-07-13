@@ -16,7 +16,7 @@ class DiceTest extends TestCase
 
     public function testInvalidValueToQuantity()
     {
-        $invalids = [-1,0,6,20];
+        $invalids = [-1,6,20];
         foreach($invalids as $quantity) {
             $this->assertFalse(Dice::isValidQuantity($quantity));
         }
@@ -47,7 +47,7 @@ class DiceTest extends TestCase
     public function testInvalidInputToPlay()
     {
         $expected = ['dice'=>[]];
-        $this->assertEquals($expected, Dice::play(rand(-10,0)));
+        $this->assertEquals($expected, Dice::play(rand(-10,-1)));
     }
 
     public function testValidResultByOneDice()
