@@ -7,18 +7,40 @@ This is only game dice, under format API.
 - `git clone`;
 - `cp .env.example .env`;
 - Set string(32) to `APP_KEY`;
-- `docker-compose up`;
+- `docker-compose up -d`;
 
-## Execute Test Unit
+## Execute [PHP Unit](https://phpunit.de/)
 
 Execute command by docker:
 
-All test:
-- `docker exec play-lumen-dice-api vendor/bin/phpunit`;
+- `docker exec play-lumen-dice-api vendor/bin/phpunit`; (default)
+- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/class/DiceTest.php`; (by file - class)
 
-Or one test
-- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/class/DiceTest.php`;
-- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/request/PlayTest.php`;
+*_Check config in `phpunit.xml`._
+
+## Execute [Psalm](https://psalm.dev/)
+
+Execute command by docker:
+
+- `docker exec play-lumen-dice-api vendor/bin/psalm`; (default)
+- `docker exec play-lumen-dice-api vendor/bin/psalm app/Http/Controllers/DiceController.php`; (by file)
+- `docker exec play-lumen-dice-api vendor/bin/psalm app/Http/Controllers/`; (by folder)
+
+Or only single file
+
+*_Check config in `psalm.xml`._
+
+## Execute [PHP Insights](https://phpinsights.com/)
+
+Execute command by docker:
+
+- `docker exec play-lumen-dice-api vendor/bin/phpinsights`; (default)
+- `docker exec play-lumen-dice-api vendor/bin/phpinsights analyse app/Http/Controllers/DiceController.php`; (by file)
+- `docker exec play-lumen-dice-api vendor/bin/phpinsights analyse app/Http/Controllers/`; (by folder)
+
+## Collection by [Postman](https://www.postman.com/)
+- Version: `v2.1.0`;
+- File: `app/doc/postman/Play-Lumen-Dice.postman_collection.json`;
 
 ## Request to play
 

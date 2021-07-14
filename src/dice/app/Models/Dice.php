@@ -4,21 +4,23 @@ namespace App\Models;
 
 class Dice
 {
-    const FACES = [4,6,8,10,12,13,14,15,16,17,18,19,20];
-    const FACE_DEFAULT = 6;
-    const QUANTITY_DEFAULT = 1;
-    const QUANTITY_LIMIT = 5;
+    public const FACES = [4,6,8,10,12,13,14,15,16,17,18,19,20];
+    public const FACE_DEFAULT = 6;
+    public const QUANTITY_DEFAULT = 1;
+    public const QUANTITY_LIMIT = 5;
 
-    public static function play(int $quantity = self::QUANTITY_DEFAULT, int $face = self::FACE_DEFAULT): array
-    {
-        $data = ['dice'=>[]];
-        $face = ($face == 0) ? self::FACE_DEFAULT : $face;
-        $quantity = ($quantity == 0) ? self::QUANTITY_DEFAULT : $quantity;
-        if (!self::isValidQuantity($quantity) || !self::isValidFace($face)) {
+    public static function play(
+        int $quantity = self::QUANTITY_DEFAULT,
+        int $face = self::FACE_DEFAULT
+    ): array {
+        $data = ['dice' => []];
+        $face = $face === 0 ? self::FACE_DEFAULT : $face;
+        $quantity = $quantity === 0 ? self::QUANTITY_DEFAULT : $quantity;
+        if (! self::isValidQuantity($quantity) || ! self::isValidFace($face)) {
             return $data;
         }
 
-        $i=0;
+        $i = 0;
         while ($i < $quantity) {
             $data['dice'][] = rand(1, $face);
             $i++;
