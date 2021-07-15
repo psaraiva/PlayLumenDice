@@ -19,8 +19,9 @@ class DiceController extends Controller
             ],
         ]);
 
-        $result = Dice::play((int) $request->quantity, (int) $request->face);
-        if (count($result['dice']) < 1) {
+        $dice = new Dice((int) $request->quantity, (int) $request->face);
+        $result = $dice->play();
+        if (count($result['dice']) == 0) {
             return response()->json([], 422);
         }
 

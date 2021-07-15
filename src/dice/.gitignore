@@ -1,4 +1,5 @@
 /vendor
+/QA_Insights
 /.idea
 Homestead.json
 Homestead.yaml

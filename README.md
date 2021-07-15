@@ -46,19 +46,19 @@ Execute command by docker:
 
 Request:
 
-- `http://0.0.0.0/api/play`
+- `http://0.0.0.0/api/play`;
 
 Method:
-- GET
+- `GET`;
 
 Parameters:
-- quantity `[1-5]`
-- face `[4,6,8,10,12,13,14,15,16,17,18,19,20]`
+- quantity `[1-5]`;
+- face `[4,6,8,10,12,13,14,15,16,17,18,19,20]`;
 
 Description:
 
-- `Quantity` is not required and default value is `1`.
-- `Face` is not required and default value is `6`.
+- `Face` is not required and default value is `6`;
+- `Quantity` is not required and default value is `1`;
 
 Response:
 ```

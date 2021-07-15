@@ -2,40 +2,49 @@
 
 namespace App\Models;
 
-class Dice
+final class Dice
 {
     public const FACES = [4,6,8,10,12,13,14,15,16,17,18,19,20];
     public const FACE_DEFAULT = 6;
     public const QUANTITY_DEFAULT = 1;
     public const QUANTITY_LIMIT = 5;
 
-    public static function play(
-        int $quantity = self::QUANTITY_DEFAULT,
-        int $face = self::FACE_DEFAULT
-    ): array {
+    public function __construct(int $quantity = 1, int $face = 6)
+    {
+        $this->face = $face === 0 ? self::FACE_DEFAULT : $face;
+        $this->quantity = $quantity === 0 ? self::QUANTITY_DEFAULT : $quantity;
+    }
+
+    public function play(): array
+    {
         $data = ['dice' => []];
-        $face = $face === 0 ? self::FACE_DEFAULT : $face;
-        $quantity = $quantity === 0 ? self::QUANTITY_DEFAULT : $quantity;
-        if (! self::isValidQuantity($quantity) || ! self::isValidFace($face)) {
+        if (! $this->isValidQuantity() || ! $this->isValidFace()) {
             return $data;
         }
 
+        $data['dice'] = $this->roll();
+        return $data;
+    }
+
+    public function isValidQuantity(): bool
+    {
+        return $this->quantity > 0 && $this->quantity <= self::QUANTITY_LIMIT;
+    }
+
+    public function isValidFace(): bool
+    {
+        return in_array($this->face, self::FACES);
+    }
+
+    private function roll(): array
+    {
         $i = 0;
-        while ($i < $quantity) {
-            $data['dice'][] = rand(1, $face);
+        $data = [];
+        while ($i < $this->quantity) {
+            $data[] = rand(1, $this->face);
             $i++;
         }
 
         return $data;
-    }
-
-    public static function isValidQuantity(int $quantity): bool
-    {
-        return $quantity > 0 && $quantity <= self::QUANTITY_LIMIT;
-    }
-
-    public static function isValidFace(int $face): bool
-    {
-        return in_array($face, self::FACES);
     }
 }

@@ -7,68 +7,98 @@ use App\Models\Dice;
 
 class DiceTest extends TestCase
 {
-    public function testValidValieToQuantity()
+    public const RESPONSE_FAIL = ['dice'=>[]];
+
+    public function testValueDefaultToQuantity()
     {
+        $dice = new Dice();
         foreach(range(1,5) as $quantity) {
-            $this->assertTrue(Dice::isValidQuantity($quantity));
+            $dice->quantity = $quantity;
+            $this->assertTrue($dice->isValidQuantity());
         }
     }
 
-    public function testInvalidValueToQuantity()
+    public function testLimitToQuantity()
     {
-        $invalids = [-1,6,20];
+        $dice = new Dice();
+        foreach(range(1, Dice::QUANTITY_LIMIT) as $quantity) {
+            $dice->quantity = $quantity;
+            $this->assertTrue($dice->isValidQuantity());
+        }
+    }
+
+    public function testInvalidValueDefaultToQuantity()
+    {
+        $dice = new Dice();
+        $invalids = [-1,6];
         foreach($invalids as $quantity) {
-            $this->assertFalse(Dice::isValidQuantity($quantity));
+            $dice->quantity = $quantity;
+            $this->assertFalse($dice->isValidQuantity());
         }
     }
 
-    public function testValidValueToFace()
+    public function testValidValueDefaultToFace()
     {
+        $dice = new Dice();
         $expected = Dice::FACES;
         foreach ($expected as $face) {
-            $this->assertTrue(Dice::isValidFace($face));
+            $dice->face = $face;
+            $this->assertTrue($dice->isValidFace());
         }
     }
 
     public function testInvalidValueToFace()
     {
+        $dice = new Dice();
         $expected = [-1,0,1,2,3,5,7,9,11,21];
         foreach ($expected as $face) {
-            $this->assertFalse(Dice::isValidFace(1,$face));
+            $dice->face = $face;
+            $this->assertFalse($dice->isValidFace());
         }
     }
 
-//@todo build test for default values of play methods.
-
     public function testQuantityDiceByResult()
     {
+        $dice = new Dice();
         $quantity = rand(1,5);
-        $this->assertEquals($quantity, count(Dice::play($quantity)['dice']));
+        $dice->quantity = $quantity;
+        $this->assertEquals($quantity, count($dice->play()['dice']));
     }
 
-    public function testInvalidInputToPlay()
+    public function testInvalidValueQuantityToPlay()
+    {
+        $dice = new Dice();
+        $dice->quantity = rand(-10, -1);
+        $this->assertEquals(self::RESPONSE_FAIL, $dice->play());
+    }
+
+    public function testInvalidValueFaceToPlay()
     {
         $expected = ['dice'=>[]];
-        $this->assertEquals($expected, Dice::play(rand(-10,-1)));
+        $dice = new Dice();
+        $dice->quantity = rand(-10, -1);
+        $this->assertEquals(self::RESPONSE_FAIL, $dice->play());
     }
 
     public function testValidResultByOneDice()
     {
         $expected = Dice::FACES;
-        foreach ($expected as $dice) {
-            $range = range(1, $dice);
-            $this->assertTrue(in_array(Dice::play(1,$dice)['dice'][0], $range));
+        $dice = new Dice();
+
+        foreach ($expected as $face) {
+            $range = range(1, $face);
+            $dice->face = $face;
+            $this->assertTrue(in_array($dice->play()['dice'][0], $range));
         }
     }
 
     public function testValidResultByMutipleDice()
     {
-        $quantity = rand(1,5);
-        $resp = Dice::play($quantity);
-
-        $this->assertEquals($quantity, count($resp['dice']));
-        foreach($resp['dice'] as $dice) {
-            $this->assertTrue(in_array($dice, range(1,Dice::FACE_DEFAULT)));
+        $dice = new Dice(rand(1, 5));
+        $resp = $dice->play();
+        $this->assertEquals($dice->quantity, count($resp['dice']));
+        foreach($resp['dice'] as $resp) {
+            $this->assertTrue(in_array($resp, range(1, Dice::FACE_DEFAULT)));
         }
     }
 }
