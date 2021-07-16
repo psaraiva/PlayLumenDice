@@ -16,10 +16,12 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     volumes:
-      - ./src/dice:/var/www
+      - ./src:/var/www/dice
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
+    depends_on:
+      - db
 
   #Nginx Service
   webserver:
@@ -31,8 +33,29 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./src/dice:/var/www
+      - ./src:/var/www/dice
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mariadb
+    container_name: play-lumen-dice-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
 
@@ -40,3 +63,8 @@ services:
 networks:
   app-network:
     driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local

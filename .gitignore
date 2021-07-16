@@ -1,0 +1,7 @@
+/QA_Insights
+/src/vendor
+/src/.idea
+/src/Homestead.json
+/src/Homestead.yaml
+/src/.env
+/src/.phpunit.result.cache
