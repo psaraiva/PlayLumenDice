@@ -1,7 +1,0 @@
-/vendor
-/QA_Insights
-/.idea
-Homestead.json
-Homestead.yaml
-.env
-.phpunit.result.cache
