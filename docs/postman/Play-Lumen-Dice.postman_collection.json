@@ -18,20 +18,33 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "Suported only application/json or image/png",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html",
+						"description": "Not suported...",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "image/png",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"body": {
 					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "face",
-							"value": "120",
-							"type": "text",
-							"disabled": true
-						}
-					]
+					"formdata": []
 				},
 				"url": {
-					"raw": "http://0.0.0.0/api/play?face=120&quantity=11",
+					"raw": "http://0.0.0.0:80/api/dice/play?face=6&quantity=5",
 					"protocol": "http",
 					"host": [
 						"0",
@@ -39,18 +52,20 @@
 						"0",
 						"0"
 					],
+					"port": "80",
 					"path": [
 						"api",
+						"dice",
 						"play"
 					],
 					"query": [
 						{
 							"key": "face",
-							"value": "120"
+							"value": "6"
 						},
 						{
 							"key": "quantity",
-							"value": "11"
+							"value": "5"
 						}
 					]
 				},
