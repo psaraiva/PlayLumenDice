@@ -15,7 +15,7 @@ class DiceController extends Controller
             'quantity' => 'nullable|numeric|between:0,10',
             'face' => [
                 'nullable',
-                Rule::in(Dice::FACES),
+                Rule::in(config('dice.face.allowed')),
             ],
         ]);
 

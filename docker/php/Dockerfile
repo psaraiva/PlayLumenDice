@@ -25,10 +25,10 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
-COPY ./src /var/www/play-lumen-dice
+COPY ./src /var/www
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/play-lumen-dice
+COPY --chown=www:www . /var/www
 
 # Change current user to www
 USER www

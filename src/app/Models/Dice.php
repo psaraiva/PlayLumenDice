@@ -4,15 +4,10 @@ namespace App\Models;
 
 final class Dice
 {
-    public const FACES = [4,6,8,10,12,13,14,15,16,17,18,19,20];
-    public const FACE_DEFAULT = 6;
-    public const QUANTITY_DEFAULT = 1;
-    public const QUANTITY_LIMIT = 5;
-
     public function __construct(int $quantity = 1, int $face = 6)
     {
-        $this->face = $face === 0 ? self::FACE_DEFAULT : $face;
-        $this->quantity = $quantity === 0 ? self::QUANTITY_DEFAULT : $quantity;
+        $this->face = $face === 0 ? config('dice.face.default') : $face;
+        $this->quantity = $quantity === 0 ? config('dice.quantity.default') : $quantity;
     }
 
     public function play(): array
@@ -28,12 +23,12 @@ final class Dice
 
     public function isValidQuantity(): bool
     {
-        return $this->quantity > 0 && $this->quantity <= self::QUANTITY_LIMIT;
+        return $this->quantity > 0 && $this->quantity <= config('dice.quantity.limit');
     }
 
     public function isValidFace(): bool
     {
-        return in_array($this->face, self::FACES);
+        return in_array($this->face, config('dice.face.allowed'));
     }
 
     private function roll(): array

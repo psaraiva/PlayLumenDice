@@ -60,6 +60,9 @@ $app->singleton(
 */
 
 $app->configure('app');
+collect(scandir(__DIR__ . '/../config'))->each(function ($file) use ($app) {
+    $app->configure(basename($file, '.php'));
+});
 
 /*
 |--------------------------------------------------------------------------

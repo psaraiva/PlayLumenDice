@@ -21,7 +21,7 @@ class DiceTest extends TestCase
     public function testLimitToQuantity()
     {
         $dice = new Dice();
-        foreach(range(1, Dice::QUANTITY_LIMIT) as $quantity) {
+        foreach(range(1, config('dice.quantity.limit')) as $quantity) {
             $dice->quantity = $quantity;
             $this->assertTrue($dice->isValidQuantity());
         }
@@ -40,7 +40,7 @@ class DiceTest extends TestCase
     public function testValidValueDefaultToFace()
     {
         $dice = new Dice();
-        $expected = Dice::FACES;
+        $expected = config('dice.face.allowed');
         foreach ($expected as $face) {
             $dice->face = $face;
             $this->assertTrue($dice->isValidFace());
@@ -82,7 +82,7 @@ class DiceTest extends TestCase
 
     public function testValidResultByOneDice()
     {
-        $expected = Dice::FACES;
+        $expected = config('dice.face.allowed');
         $dice = new Dice();
 
         foreach ($expected as $face) {
@@ -98,7 +98,7 @@ class DiceTest extends TestCase
         $resp = $dice->play();
         $this->assertEquals($dice->quantity, count($resp['dice']));
         foreach($resp['dice'] as $resp) {
-            $this->assertTrue(in_array($resp, range(1, Dice::FACE_DEFAULT)));
+            $this->assertTrue(in_array($resp, range(1, config('dice.face.default'))));
         }
     }
 }

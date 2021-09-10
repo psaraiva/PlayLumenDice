@@ -6,8 +6,9 @@ This is only game dice, under format API.
 
 - `git clone`;
 - `cp .env.example .env`;
-- Set string(32) to `APP_KEY`;
 - `docker-compose --env-file ./src/.env up -d`;
+- `docker exec -it play-lumen-dice-api php composer install`;
+- Set *string(32)* to **APP_KEY** in **.env** file; (Linux: `echo -n 'my super password' | md5sum`)
 
 ## Execute [PHP Unit](https://phpunit.de/)
 
