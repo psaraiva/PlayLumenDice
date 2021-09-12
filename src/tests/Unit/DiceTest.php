@@ -81,6 +81,7 @@ test('Valid result by one dice', function () {
 test('Valid result by mutiple dice', function () {
     $dice = new Dice(rand(1, 5));
     $resp = $dice->play();
+
     $this->assertEquals($dice->quantity, count($resp['dice']));
     foreach($resp['dice'] as $resp) {
         $this->assertTrue(in_array($resp, range(1, config('dice.face.default'))));
