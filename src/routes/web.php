@@ -18,5 +18,5 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('play', ['uses' => 'DiceController@play']);
+    $router->get('dice/play', ['uses' => 'DiceController@play']);
 });

@@ -1,6 +1,6 @@
 # Play Lumen Dice
 
-This is only game dice, under format API.
+This is game of dice, under format API.
 
 ## Deploy (local)
 
@@ -10,16 +10,24 @@ This is only game dice, under format API.
 - `docker exec -it play-lumen-dice-api php composer install`;
 - Set *string(32)* to **APP_KEY** in **.env** file; (Linux: `echo -n 'my super password' | md5sum`)
 
-## Execute [PHP Unit](https://phpunit.de/)
-
+-- -
+## [PHP Pest](https://pestphp.com/)
 Execute command by docker:
 
-- `docker exec play-lumen-dice-api vendor/bin/phpunit` (default)
-- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/class/DiceTest.php` (by file - class)
+- `docker exec -it play-lumen-dice-api ./vendor/bin/pest` (default)
+- `docker exec -it play-lumen-dice-api ./vendor/bin/pest --group resource-json` (by group)
 
-*_Check config in `phpunit.xml`._
+Groups
+- unit
+- model
+- model-dice
+- request
+- resource-json
 
-## Execute [Psalm](https://psalm.dev/)
+*_Check config in `phpunit.xml`. e `Pest.php`._
+
+-- -
+## [Psalm](https://psalm.dev/)
 
 Execute command by docker:
 
@@ -29,7 +37,8 @@ Execute command by docker:
 
 *_Check config in `psalm.xml`._
 
-## Execute [PHP Insights](https://phpinsights.com/)
+-- -
+## [PHP Insights](https://phpinsights.com/)
 
 Execute command by docker:
 
@@ -38,18 +47,23 @@ Execute command by docker:
 - `docker exec play-lumen-dice-api vendor/bin/phpinsights analyse app/Http/Controllers/` (by folder)
 - `docker exec play-lumen-dice-api vendor/bin/phpinsights analyse --format=json > DiceClass.json app/Models/Dice.php` (save json)
 
+-- -
 ## Collection by [Postman](https://www.postman.com/)
 - Version: `v2.1.0`
 - File: `app/doc/postman/Play-Lumen-Dice.postman_collection.json`
 
+-- -
 ## Request to play
 
 Request:
 
-- `http://0.0.0.0/api/play`
+- `http://0.0.0.0/api/dice/play`
 
 Method:
 - `GET`
+
+Header:
+- `Accept`: `[application/json,image/png]`
 
 Parameters:
 - Quantity `[1-5]`
@@ -60,14 +74,20 @@ Description:
 - `Face` is not required and default value is `6`.
 - `Quantity` is not required and default value is `1`.
 
-Response:
+Response Json to quantity `3`, face `6`:
 ```
 {
     "dice": [
-        2
+        2,
+        4,
+        1
     ]
 }
 ```
+
+Response Image PNG to quantity `3`, face `6`:
+
+![alt text](docs/assets/3_dice_6_faces.png)
 
 ## Developement
 Today the API contains only single feature, but,
