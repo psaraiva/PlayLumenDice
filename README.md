@@ -1,6 +1,6 @@
 # Play Lumen Dice
 
-This is only game dice, under format API.
+This is game of dice, under format API.
 
 ## Deploy (local)
 
@@ -11,14 +11,20 @@ This is only game dice, under format API.
 - Set *string(32)* to **APP_KEY** in **.env** file; (Linux: `echo -n 'my super password' | md5sum`)
 
 -- -
-## [PHP Unit](https://phpunit.de/)
-
+## [PHP Pest](https://pestphp.com/)
 Execute command by docker:
 
-- `docker exec play-lumen-dice-api vendor/bin/phpunit` (default)
-- `docker exec play-lumen-dice-api vendor/bin/phpunit --bootstrap bootstrap/app.php tests/class/DiceTest.php` (by file - class)
+- `docker exec -it play-lumen-dice-api ./vendor/bin/pest` (default)
+- `docker exec -it play-lumen-dice-api ./vendor/bin/pest --group resource-json` (by group)
 
-*_Check config in `phpunit.xml`._
+Groups
+- unit
+- model
+- model-dice
+- request
+- resource-json
+
+*_Check config in `phpunit.xml`. e `Pest.php`._
 
 -- -
 ## [Psalm](https://psalm.dev/)
