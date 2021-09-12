@@ -16,6 +16,7 @@ Execute command by docker:
 
 - `docker exec -it play-lumen-dice-api ./vendor/bin/pest` (default)
 - `docker exec -it play-lumen-dice-api ./vendor/bin/pest --group resource-json` (by group)
+- `docker exec -it play-lumen-dice-api ./vendor/bin/pest --coverage` (by coverage)
 
 Groups
 - unit
@@ -23,6 +24,8 @@ Groups
 - model-dice
 - request
 - resource-json
+- helper
+- helper-mime-type
 
 *_Check config in `phpunit.xml`. e `Pest.php`._
 
