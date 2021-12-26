@@ -43,6 +43,7 @@ class DiceController extends Controller
         }
 
         $result = $this->rollDice((int) $request->quantity, (int) $request->face);
+        sleep(rand(1, 4)); // OMG Sleep here!
         return $this->$method($result);
     }
 
