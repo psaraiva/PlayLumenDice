@@ -5,9 +5,10 @@ This is game of dice, under format API.
 ## Deploy (local)
 
 - `git clone`;
-- `cp .env.example .env`;
+- `cd PlayLumenDice`
+- `cp ./src/.env.example ./src/.env`;
 - `docker-compose --env-file ./src/.env up -d`;
-- `docker exec -it play-lumen-dice-api php composer install`;
+- `docker exec -it play-lumen-dice-api php /usr/bin/composer install`;
 - Set *string(32)* to **APP_KEY** in **.env** file; (Linux: `echo -n 'my super password' | md5sum`)
 
 -- -
