@@ -1,0 +1,21 @@
+// Configuração para os cabeçalhos
+@hostname = localhost
+//9003 debug | 1080 default
+@port = 9003
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+// application/json|image/png
+@accept = image/png
+
+// Parans
+@quantity = 5
+@face = 6
+
+GET http://{{host}}/api/dice/play?quantity={{quantity}}&face={{face}} HTTP/1.1
+content-type: {{contentType}}
+Accept: {{accept}}
+###
+
+GET http://{{host}}/test HTTP/1.1
+content-type: {{contentType}}
+###

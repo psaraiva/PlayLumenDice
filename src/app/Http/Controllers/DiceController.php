@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -30,7 +31,7 @@ class DiceController extends Controller
         }
 
         $this->validate($request, [
-            'quantity' => 'nullable|numeric|between:0,10',
+            'quantity' => 'nullable|numeric|between:1,5',
             'face' => [
                 'nullable',
                 Rule::in(config('dice.face.allowed')),
@@ -43,7 +44,6 @@ class DiceController extends Controller
         }
 
         $result = $this->rollDice((int) $request->quantity, (int) $request->face);
-        sleep(rand(1, 4)); // OMG Sleep here!
         return $this->$method($result);
     }
 

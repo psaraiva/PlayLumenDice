@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Helpers;
 
@@ -72,7 +73,7 @@ final class DiceImage {
         imagepng($img);
         $pngBuffer = ob_get_contents();
         ob_end_clean();
-        
+
         return $pngBuffer;
     }
 }

@@ -93,6 +93,14 @@ Response Image PNG to quantity `3`, face `6`:
 
 ![alt text](docs/assets/3_dice_6_faces.png)
 
+## Enable to use with REST Client - see request folder
+- Name: REST Client
+- Id: humao.rest-client
+- Description: REST Client for Visual Studio Code
+- Version: 0.25.1
+- Publisher: Huachao Mao
+- VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
 ## Developement
 Today the API contains only single feature, but,
 in the future it may have more interesting features...
