@@ -1,12 +1,10 @@
-version: '3'
 services:
 
   #PHP Service
   app:
     build:
-      context: .
+      context: ./
       dockerfile: docker/php/Dockerfile
-    image: php:fpm-php8.0
     container_name: play-lumen-dice-api
     restart: unless-stopped
     tty: true
@@ -23,13 +21,12 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx:1.21.1
+    image: nginx:1.21.6
     container_name: play-lumen-dice-webserver
     restart: unless-stopped
     tty: true
     ports:
       - "1080:80"
-      - "1443:443"
     volumes:
       - ./src:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
@@ -40,8 +37,3 @@ services:
 networks:
   app-network:
     driver: bridge
-
-#Volumes
-volumes:
-  dbdata:
-    driver: local

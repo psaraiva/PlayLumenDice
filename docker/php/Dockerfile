@@ -1,4 +1,7 @@
-FROM php:8.0-fpm
+FROM php:8.0.30-fpm
+
+# USER ROOT
+USER 0
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \

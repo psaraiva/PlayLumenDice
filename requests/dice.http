@@ -1,8 +1,9 @@
-// Configuração para os cabeçalhos
+// Config request
 @hostname = localhost
-//9003 debug | 1080 default
-@port = 9003
-@host = {{hostname}}:{{port}}
+@port_debug = 9003
+@port_deault = 1080
+@port_local = 8000
+@host = {{hostname}}:{{port_local}}
 @contentType = application/json
 // application/json|image/png
 @accept = image/png
@@ -14,8 +15,4 @@
 GET http://{{host}}/api/dice/play?quantity={{quantity}}&face={{face}} HTTP/1.1
 content-type: {{contentType}}
 Accept: {{accept}}
-###
-
-GET http://{{host}}/test HTTP/1.1
-content-type: {{contentType}}
 ###
